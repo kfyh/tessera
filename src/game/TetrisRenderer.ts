@@ -34,8 +34,8 @@ export class TetrisRenderer {
     boardContainer.appendChild(this.boardApp.canvas);
 
     await this.nextApp.init({
-      width: 84,
-      height: 84,
+      width: 44,
+      height: 36,
       backgroundAlpha: 0,
       antialias: false,
       resolution: Math.min(window.devicePixelRatio || 1, 2),
@@ -144,11 +144,10 @@ export class TetrisRenderer {
 
   private computeCellSize(boardContainer: HTMLElement): number {
     const parent = boardContainer.parentElement;
-    // Reserve space for the side Next-piece panel (approx 116px including gap)
-    const availW = parent ? parent.clientWidth - 120 : window.innerWidth - 128;
-    const availH = parent ? parent.clientHeight - 8 : window.innerHeight - 200;
+    const availW = parent ? parent.clientWidth - 8 : window.innerWidth - 28;
+    const availH = parent ? parent.clientHeight - 12 : window.innerHeight - 100;
     const size = Math.floor(Math.min(availW / COLS, availH / ROWS));
-    return Math.max(14, Math.min(36, size));
+    return Math.max(14, Math.min(42, size));
   }
 
   private buildBoardLayers(): void {
@@ -231,9 +230,9 @@ export class TetrisRenderer {
 
     const spanC = maxC - minC + 1;
     const spanR = maxR - minR + 1;
-    const cell = 19;
-    const offsetX = Math.floor((84 - spanC * cell) / 2);
-    const offsetY = Math.floor((84 - spanR * cell) / 2);
+    const cell = 9;
+    const offsetX = Math.floor((44 - spanC * cell) / 2);
+    const offsetY = Math.floor((36 - spanR * cell) / 2);
 
     this.nextSprites.forEach((s, i) => {
       const pt = cells[i];

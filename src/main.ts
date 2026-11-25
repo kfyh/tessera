@@ -53,16 +53,18 @@ async function bootstrap(): Promise<void> {
 
     if (snap.gameOver) {
       overlay.classList.remove('hidden');
+      overlay.classList.add('is-gameover');
       overlayTitle.textContent = 'GAME OVER';
       overlaySub.textContent = `Score ${snap.score} • Level ${snap.level} • 4-Lines ${snap.tetrisCount} • Max Block ${snap.maxBlockSize}`;
       overlayBtn.textContent = 'PLAY AGAIN';
     } else if (snap.paused) {
-      overlay.classList.remove('hidden');
+      overlay.classList.remove('hidden', 'is-gameover');
       overlayTitle.textContent = 'PAUSED';
       overlaySub.textContent = 'Tap Resume or press P';
       overlayBtn.textContent = 'RESUME';
     } else {
       overlay.classList.add('hidden');
+      overlay.classList.remove('is-gameover');
     }
   };
 
@@ -93,6 +95,7 @@ async function bootstrap(): Promise<void> {
     document.addEventListener('fullscreenchange', () => {
       syncFullscreenBtn();
       renderer.resize(gameStage);
+      requestAnimationFrame(() => renderer.resize(gameStage));
     });
     syncFullscreenBtn();
   }
@@ -175,12 +178,22 @@ async function bootstrap(): Promise<void> {
     }
   });
 
-  window.addEventListener('blur', () => {
+  const pauseAndClearInputs = () => {
     heldKeys.clear();
     blockedKeys.clear();
     game.setSoftDropHeld(false);
     for (const stopHold of clearTouchHolds) {
       stopHold();
+    }
+    game.setPaused(true);
+    syncHud();
+  };
+
+  window.addEventListener('blur', pauseAndClearInputs);
+  window.addEventListener('pagehide', pauseAndClearInputs);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      pauseAndClearInputs();
     }
   });
 
