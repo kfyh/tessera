@@ -18,7 +18,7 @@
   </head>
   <body>
     <div id="app">
-      <header class="hud">
+      <header class="stats-bar" aria-label="Game Stats, Next Piece, and Controls">
         <div class="stat">
           <span class="label">SCORE</span>
           <span id="score-val" class="value">0</span>
@@ -39,6 +39,10 @@
           <span class="label">MAX BLK</span>
           <span id="block-val" class="value">0</span>
         </div>
+        <div class="next-inline" aria-label="Next Piece">
+          <span class="label">NEXT</span>
+          <div id="next-stage" class="next-stage"></div>
+        </div>
         <div class="hud-actions">
           <button id="fullscreen-btn" class="icon-btn" type="button" aria-label="Toggle Fullscreen">
             ⛶
@@ -49,33 +53,53 @@
         </div>
       </header>
 
-      <main class="board-wrap">
-        <div id="game-stage" class="game-stage"></div>
-        <aside class="side-panel" aria-label="Next Piece">
-          <span class="label">NEXT</span>
-          <div id="next-stage" class="next-stage"></div>
-        </aside>
-        <div id="overlay" class="overlay hidden" role="dialog" aria-live="polite">
-          <div class="overlay-card">
-            <h2 id="overlay-title">PAUSED</h2>
-            <p id="overlay-sub">Tap or press Space to continue</p>
-            <button id="overlay-btn" class="primary-btn" type="button">RESUME</button>
+      <div class="play-area">
+        <main class="board-wrap">
+          <div id="game-stage" class="game-stage"></div>
+          <div id="overlay" class="overlay hidden" role="dialog" aria-live="polite">
+            <div class="pause-zones" aria-hidden="true">
+              <div class="pause-zone zone-left">
+                <div class="zone-badge">
+                  <span class="zone-icon">◀</span>
+                  <span class="zone-label">LEFT</span>
+                </div>
+              </div>
+              <div class="pause-zone zone-right">
+                <div class="zone-badge">
+                  <span class="zone-icon">▶</span>
+                  <span class="zone-label">RIGHT</span>
+                </div>
+              </div>
+              <div class="pause-zone-gap"></div>
+              <div class="pause-zone zone-rotate">
+                <div class="zone-badge">
+                  <span class="zone-icon">↻</span>
+                  <span class="zone-label">ROTATE</span>
+                </div>
+              </div>
+              <div class="pause-zone zone-drop">
+                <div class="zone-badge">
+                  <span class="zone-icon">▼</span>
+                  <span class="zone-label">DROP</span>
+                </div>
+              </div>
+            </div>
+            <div class="overlay-card">
+              <h2 id="overlay-title">PAUSED</h2>
+              <p id="overlay-sub">Tap or press Space to continue</p>
+              <button id="overlay-btn" class="primary-btn" type="button">RESUME</button>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <footer class="controls" aria-label="Touch Controls">
-        <div class="controls-row">
-          <div class="controls-group">
-            <button id="btn-left" class="ctrl-btn" type="button" aria-label="Move Left">◀</button>
-            <button id="btn-right" class="ctrl-btn" type="button" aria-label="Move Right">▶</button>
-          </div>
-          <div class="controls-group">
-            <button id="btn-rotate" class="ctrl-btn rotate" type="button" aria-label="Rotate">↻</button>
-            <button id="btn-down" class="ctrl-btn drop" type="button" aria-label="Fast Drop">▼</button>
-          </div>
+        <div class="controls" aria-label="Touch Controls">
+          <button id="btn-left" class="ctrl-btn" type="button" aria-label="Move Left"></button>
+          <button id="btn-right" class="ctrl-btn" type="button" aria-label="Move Right"></button>
+          <div class="controls-gap" aria-hidden="true"></div>
+          <button id="btn-rotate" class="ctrl-btn" type="button" aria-label="Rotate"></button>
+          <button id="btn-down" class="ctrl-btn" type="button" aria-label="Fast Drop"></button>
         </div>
-      </footer>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
