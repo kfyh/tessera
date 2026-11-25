@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2ede4" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171411" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Blocks" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <title>Blocks</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="hud">
+        <div class="stat">
+          <span class="label">SCORE</span>
+          <span id="score-val" class="value">0</span>
+        </div>
+        <div class="stat">
+          <span class="label">LEVEL</span>
+          <span id="level-val" class="value">1</span>
+        </div>
+        <div class="stat">
+          <span class="label">LINES</span>
+          <span id="lines-val" class="value">0</span>
+        </div>
+        <div class="stat">
+          <span class="label">4-LINE</span>
+          <span id="tetris-val" class="value accent">0</span>
+        </div>
+        <div class="stat">
+          <span class="label">MAX BLK</span>
+          <span id="block-val" class="value">0</span>
+        </div>
+        <div class="hud-actions">
+          <button id="fullscreen-btn" class="icon-btn" type="button" aria-label="Toggle Fullscreen">
+            ⛶
+          </button>
+          <button id="pause-btn" class="icon-btn" type="button" aria-label="Pause or Resume">
+            II
+          </button>
+        </div>
+      </header>
+
+      <main class="board-wrap">
+        <div id="game-stage" class="game-stage"></div>
+        <aside class="side-panel" aria-label="Next Piece">
+          <span class="label">NEXT</span>
+          <div id="next-stage" class="next-stage"></div>
+        </aside>
+        <div id="overlay" class="overlay hidden" role="dialog" aria-live="polite">
+          <div class="overlay-card">
+            <h2 id="overlay-title">PAUSED</h2>
+            <p id="overlay-sub">Tap or press Space to continue</p>
+            <button id="overlay-btn" class="primary-btn" type="button">RESUME</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="controls" aria-label="Touch Controls">
+        <div class="controls-row">
+          <div class="controls-group">
+            <button id="btn-left" class="ctrl-btn" type="button" aria-label="Move Left">◀</button>
+            <button id="btn-right" class="ctrl-btn" type="button" aria-label="Move Right">▶</button>
+          </div>
+          <div class="controls-group">
+            <button id="btn-rotate" class="ctrl-btn rotate" type="button" aria-label="Rotate">↻</button>
+            <button id="btn-down" class="ctrl-btn drop" type="button" aria-label="Fast Drop">▼</button>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
