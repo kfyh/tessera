@@ -4,7 +4,7 @@ import { TetrisRenderer } from './game/TetrisRenderer';
 
 async function bootstrap(): Promise<void> {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => undefined);
   }
 
   const gameStage = document.getElementById('game-stage')!;
